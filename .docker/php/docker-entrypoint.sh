@@ -23,6 +23,9 @@ fi
 
 # Handle composer credentials && run composer install
 composer config --global http-basic.repo.magento.com $PUBLIC_KEY $PRIVATE_KEY
-composer install --no-progress --no-suggest --no-interaction
+
+mkdir /app/vendor
+
+composer install --no-progress --no-interaction
 
 exec "$@"

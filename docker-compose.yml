@@ -34,8 +34,12 @@ services:
   fpm:
     hostname: fpm.magento2.docker
     build: ./.docker/php
+    environment:
+      - PUBLIC_KEY=${PUBLIC_KEY}
+      - PRIVATE_KEY=${PRIVATE_KEY}
     volumes:
       - './app:/app:ro,delegated'
+      - './app/vendor:/app/vendor:rw,delegated'
       - './app/generated:/app/generated:rw,delegated'
       - './app/var:/app/var:rw,delegated'
       - './app/app/etc:/app/app/etc:rw,delegated'
