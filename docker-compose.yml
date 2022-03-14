@@ -1,1 +1,55 @@
 version: "3.9"
+services:
+  db:
+    hostname: db.magento2.docker
+    image: 'mariadb:10.3'
+    environment:
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+    ports:
+      - '3306:3306'
+    volumes:
+      - './app:/app:delegated'
+      - 'magento-db:/var/lib/mysql'
+    healthcheck:
+      test: 'mysqladmin ping -h localhost -pmagento2'
+      interval: 30s
+      timeout: 30s
+      retries: 3
+    networks:
+      magento:
+        aliases:
+          - db.magento2.docker
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    restart: 'always'
+    ports:
+      - 8000:80
+    networks:
+      magento:
+        aliases:
+          - phpmyadmin.magento2.docker   
+  fpm:
+    hostname: fpm.magento2.docker
+    build: ./.docker/php
+    volumes:
+      - './app:/app:ro,delegated'
+      - './app/generated:/app/generated:rw,delegated'
+      - './app/var:/app/var:rw,delegated'
+      - './app/app/etc:/app/app/etc:rw,delegated'
+      - './app/pub/media:/app/pub/media:rw,delegated'
+      - './app/pub/static:/app/pub/static:rw,delegated'
+    networks:
+      magento:
+        aliases:
+          - fpm.magento2.docker
+    depends_on:
+      db:
+        condition: service_healthy
+volumes:
+  magento-db: {  }     
+networks:
+  magento:
+    driver: bridge
