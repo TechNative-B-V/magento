@@ -30,25 +30,34 @@ composer install --no-progress --no-interaction
 
 bin/magento setup:install \
   --db-host=db \
-  --db-name=magento2 \
-  --db-user=magento2 \
-  --db-password=magento2 \
-  --admin-firstname=admin \
-  --admin-lastname=admin \
-  --admin-email=gino@technative.nl \
-  --admin-user=admin \
-  --admin-password=admin123 \
-  --use-rewrites=1 \
-  --elasticsearch-host=elasticsearch \
-  --elasticsearch-port=9200 \
-  --session-save=files \
-  --use-secure=0 \
-  --use-secure-admin=0 \
-  --backend-frontname=xpanel \
-  --base-url=http://localhost/ \
-  --base-url-secure=https://localhost/
+  --db-name=$MYSQL_DATABASE \
+  --db-user=$MYSQL_USER \
+  --db-password=$MYSQL_PASSWORD \
+  --admin-firstname=$ADMIN_FIRST_NAME \
+  --admin-lastname=$ADMIN_LAST_NAME \
+  --admin-email=$ADMIN_EMAIL \
+  --admin-user=$ADMIN_USER \
+  --admin-password=$ADMIN_PASSWORD \
+  --use-rewrites=$USE_REWRITES \
+  --elasticsearch-host=$ELASTIC_SEARCH_HOST \
+  --elasticsearch-port=$ELASTIC_SEARCH_PORT \
+  --session-save=$SESSION_SAVE \
+  --use-secure=$USE_SECURE \
+  --use-secure-$USE_SECURE_ADMIN \
+  --backend-frontname=$BACKEND_FRONTNAME \
+  --base-url=$BASE_URL \
+  --base-url-secure=$BASE_URL_SECURE
 
-bin/magento setup:static-content:deploy -f
+# bin/magento setup:static-content:deploy -f
+
+#check if 2fa needs to be enabled or disabled
+if ["$TWO_FACTOR_AUTH" = true]; then
+  bin/magento module:enable "Magento_TwoFactorAuth"
+else
+  bin/magento module:disable "Magento_TwoFactorAuth"
+fi
+
+#flush magento cache
 bin/magento cache:flush
 
 exec "$@"
