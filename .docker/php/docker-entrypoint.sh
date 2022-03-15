@@ -28,4 +28,27 @@ mkdir /app/vendor
 
 composer install --no-progress --no-interaction
 
+bin/magento setup:install \
+  --db-host=db \
+  --db-name=magento2 \
+  --db-user=magento2 \
+  --db-password=magento2 \
+  --admin-firstname=admin \
+  --admin-lastname=admin \
+  --admin-email=gino@technative.nl \
+  --admin-user=admin \
+  --admin-password=admin123 \
+  --use-rewrites=1 \
+  --elasticsearch-host=elasticsearch \
+  --elasticsearch-port=9200 \
+  --session-save=files \
+  --use-secure=0 \
+  --use-secure-admin=0 \
+  --backend-frontname=xpanel \
+  --base-url=http://localhost/ \
+  --base-url-secure=https://localhost/
+
+bin/magento setup:static-content:deploy -f
+bin/magento cache:flush
+
 exec "$@"
