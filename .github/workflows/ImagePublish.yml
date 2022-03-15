@@ -47,7 +47,7 @@ jobs:
 
       - name: Push versioned containers to Container Registry
         run: |
-          images=$(docker-compose images -q | xargs docker inspect --format='{{ index .RepoTags 0}}' | cut -d':' -f1 | grep magento-)
+          images=$(docker-compose images -q | xargs docker inspect --format='{{ index .RepoTags 0}}' | cut -d':' -f1 | grep tn-magento-)
           for image in $images
           do
             docker push "${image}":"${APP_BUILD}"
