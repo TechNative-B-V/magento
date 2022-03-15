@@ -68,6 +68,7 @@ services:
       - BACKEND_FRONTNAME=${BACKEND_FRONTNAME}
       - BASE_URL=${BASE_URL}
       - BASE_URL_SECURE=${BASE_URL_SECURE}
+      - TWO_FACTOR_AUTH=${TWO_FACTOR_AUTH}
     volumes:
       - './app:/app:ro,delegated'
       - './app/vendor:/app/vendor:rw,delegated'
