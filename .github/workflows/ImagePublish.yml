@@ -17,20 +17,43 @@ jobs:
       - uses: actions/checkout@v1
       - uses: actions/setup-node@v1
 
-      # - name: Build the Docker images
-      #   run: docker-compose build
+      - name: Setting APP_ENV to dev
+        run: |
+          echo "APP_ENV=dev">> $GITHUB_ENV
+          echo "APP_BUILD=dev">> $GITHUB_ENV
+          echo "set APP_ENV to $APP_ENV"
 
-      # - name: Run the Docker images
-      #   run: docker-compose up -d
+      - name: Setting APP_ENV to prod
+        if: contains( github.ref, 'master' ) || contains( github.base_ref, 'master' )
+        run: |
+          echo "APP_ENV=latest">> $GITHUB_ENV
+          echo "APP_BUILD=$RELEASE">> $GITHUB_ENV
+          echo "set APP_ENV to $APP_ENV"
+      - name: Setting APP_ENV to stag
 
-      # - name: Taking some sleep (for containers to come up)
-      #   run: sleep 20
+      - name: Build the Docker images
+        run: docker-compose build
+
+      - name: Run the Docker images
+        run: docker-compose up -d
+
+      - name: Taking some sleep (for containers to come up)
+        run: sleep 20
         
-      # - name: Check if all containers are running
-      #   run: docker ps
+      - name: Check if all containers are running
+        run: docker ps
 
       - name: Log in to registry
         run: echo ${{ secrets.GITHUB_TOKEN }} | docker login ghcr.io -u $(cut -d'/' -f1 <<< $GITHUB_REPOSITORY) --password-stdin
 
-      # - name: Remove docker images
-      #   run: docker-compose down
+      - name: Push versioned containers to Container Registry
+        id: version-push
+        run: |
+          images=$(docker-compose images -q | xargs docker inspect --format='{{ index .RepoTags 0}}' | cut -d':' -f1 | grep magento_)
+          for image in $images
+          do
+            docker push "${image}":"${APP_BUILD}"
+          done
+
+      - name: Remove docker images
+        run: docker-compose down
