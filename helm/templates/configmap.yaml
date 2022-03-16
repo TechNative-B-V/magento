@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Release.Name }}-configmap
+data:
+  public-key: {{ .Values.php.publicKey | quote }}
+  private-key: {{ .Values.php.privateKey | quote }}
+  use-rewrites: {{ .Values.php.useRewrites | quote }}
+  session-save: {{ .Values.php.sessionSave | quote }}
+  use-secure: {{ .Values.php.useSecure | quote }}
+  use-secure-admin: {{ .Values.php.useSecureAdmin | quote }}
+  backend-frontname: {{ .Values.php.backendFrontName | quote }}
+  base-url: {{ .Values.php.baseUrl | quote }}
+  base-url-secure: {{ .Values.php.baseUrlSecure | quote }}
+  two-factor-auth: {{ .Values.php.twoFactorAuth | quote }}
+  database-host: {{ .Values.php.database.host | quote }}
+  database-name: {{ .Values.php.database.name | quote }}
+  database-user: {{ .Values.php.database.user | quote }}
+  database-password: {{ .Values.php.database.password | quote }}
+  admin-firstname: {{ .Values.php.admin.firstName | quote }}
+  admin-lastname: {{ .Values.php.admin.lastName | quote }}
+  admin-email: {{ .Values.php.admin.email | quote }}
+  admin-username: {{ .Values.php.admin.username | quote }}
+  admin-password: {{ .Values.php.admin.password | quote }}
+  elasticsearch-host: {{ .Values.php.elasticsearch.host | quote }}
+  elasticsearch-port: {{ .Values.php.elasticsearch.port | quote }}

@@ -32,10 +32,10 @@ INSTALL=$(bin/magento config:show 2>&1 >/dev/null | grep "There are no commands 
 
 if [ ! -z "$INSTALL" ]; then
   bin/magento setup:install \
-  --db-host=db \
+  --db-host=$DB_HOST \
   --db-name=$DB_NAME \
   --db-user=$DB_USER \
-  --db-password=$MYSQL_PASSWORD \
+  --db-password=$DB_PASSWORD \
   --admin-firstname=$ADMIN_FIRST_NAME \
   --admin-lastname=$ADMIN_LAST_NAME \
   --admin-email=$ADMIN_EMAIL \

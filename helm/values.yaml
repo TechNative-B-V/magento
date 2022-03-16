@@ -1,0 +1,89 @@
+# Default values for the magento application
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+php:
+  image: ghcr.io/ginokok1996/tn-magento-php
+  tag: latest
+  replicaCount: 2
+  pullPolicy: always
+  publicKey: ce7e9740272307af36caad68f054f144
+  privateKey: d4975ceefe2051768b2e01b9796f53a0
+  useRewrites: 0
+  sessionSave: files
+  useSecure: 0
+  useSecureAdmin: 0
+  backendFrontName: xpanel
+  baseUrl: http://placeholder/
+  baseUrlSecure: https://placeholder/
+  twoFactorAuth: 0
+  database:
+    host: db
+    name: magento2
+    user: magento2
+    password: magento2
+  admin:
+    firstName: admin
+    lastName: admin
+    email: info@technative.nl
+    username: admin
+    password: admin123
+  elasticsearch:
+    host: elasticsearch
+    port: 9200
+  
+nginx:
+  image: ghcr.io/ginokok1996/tn-magento-nginx
+  tag: latest
+  replicaCount: 2
+  pullPolicy: always
+
+elasticsearch:
+  enabled: true
+  image:
+    pullPolicy: IfNotPresent
+
+mariadb:
+  enabled: false
+  image:
+    pullPolicy: IfNotPresent
+  auth:
+    database: magento2
+    username: magento2
+    password: magento2
+
+redis:
+  cluster:
+    enabled: false
+  redisPort: 6379
+  usePassword: false
+  enabled: false
+  pullPolicy: IfNotPresent
+
+ingress:
+  enabled: false
+  className: ""
+  annotations: {}
+    # kubernetes.io/ingress.class: nginx
+    # kubernetes.io/tls-acme: "true"
+  hosts:
+    - host: chart-example.local
+      paths:
+        - path: /
+          pathType: ImplementationSpecific
+  tls: []
+  #  - secretName: chart-example-tls
+  #    hosts:
+  #      - chart-example.local
+
+resources: {}
+  # We usually recommend not to specify default resources and to leave this as a conscious
+  # choice for the user. This also increases chances charts run on environments with little
+  # resources, such as Minikube. If you do want to specify resources, uncomment the following
+  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+  # limits:
+  #   cpu: 100m
+  #   memory: 128Mi
+  # requests:
+  #   cpu: 100m
+  #   memory: 128Mi

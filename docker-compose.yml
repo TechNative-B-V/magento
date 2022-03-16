@@ -52,9 +52,10 @@ services:
     environment:
       - PUBLIC_KEY=${PUBLIC_KEY}
       - PRIVATE_KEY=${PRIVATE_KEY}
+      - DB_HOST=${DB_HOST}
       - DB_NAME=${DB_NAME}
       - DB_USER=${DB_USER}
-      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+      - DB_PASSWORD=${DB_PASSWORD}
       - ADMIN_FIRST_NAME=${ADMIN_FIRST_NAME}
       - ADMIN_LAST_NAME=${ADMIN_LAST_NAME}
       - ADMIN_EMAIL=${ADMIN_EMAIL}
