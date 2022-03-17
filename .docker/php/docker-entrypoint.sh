@@ -26,7 +26,7 @@ composer config --global http-basic.repo.magento.com $PUBLIC_KEY $PRIVATE_KEY
 
 mkdir /app/vendor
 
-composer install --no-progress --no-interaction
+composer install --no-progress --no-interaction --no-autoloader
 
 INSTALL=$(bin/magento config:show 2>&1 >/dev/null | grep "There are no commands defined")
 

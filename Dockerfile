@@ -6,7 +6,7 @@ ARG MAGENTO_ROOT=/app
 ENV PHP_MEMORY_LIMIT 2G
 ENV PHP_VALIDATE_TIMESTAMPS 1
 ENV DEBUG false
-ENV MAGENTO_RUN_MODE development
+ENV MAGENTO_RUN_MODE production
 ENV UPLOAD_MAX_FILESIZE 64M
 ENV SENDMAIL_PATH /dev/null
 ENV PHPRC ${MAGENTO_ROOT}/php.ini
@@ -95,7 +95,6 @@ RUN pecl install -o -f \
     propro \
     raphf \
     redis \
-    xdebug-3.1.2 \
     yaml
 
 RUN curl -A "Docker" -o /tmp/blackfire-probe.tar.gz -D - -L -s https://blackfire.io/api/v1/releases/probe/php/linux/amd64/$(php -r "echo PHP_MAJOR_VERSION.PHP_MINOR_VERSION;") \
@@ -142,16 +141,15 @@ RUN cd /tmp \
     && rm -rf ./ioncube \
     && rm ioncube_loaders_lin_x86-64.tar.gz
 
-COPY conf/php-fpm.ini /usr/local/etc/php/conf.d/zz-magento.ini
-COPY conf/php-xdebug.ini /usr/local/etc/php/conf.d/zz-xdebug-settings.ini
-COPY conf/php-pcov.ini /usr/local/etc/php/conf.d/zz-pcov-settings.ini
-COPY conf/mail.ini /usr/local/etc/php/conf.d/zz-mail.ini
-COPY conf/php-fpm.conf /usr/local/etc/
-COPY conf/php-gnupg.ini /usr/local/etc/php/conf.d/gnupg.ini
+COPY .docker/php/conf/php-fpm.ini /usr/local/etc/php/conf.d/zz-magento.ini
+COPY .docker/php/conf/php-pcov.ini /usr/local/etc/php/conf.d/zz-pcov-settings.ini
+COPY .docker/php/conf/mail.ini /usr/local/etc/php/conf.d/zz-mail.ini
+COPY .docker/php/conf/php-fpm.conf /usr/local/etc/
+COPY .docker/php/conf/php-gnupg.ini /usr/local/etc/php/conf.d/gnupg.ini
 
 RUN groupadd -g 1000 www && useradd -g 1000 -u 1000 -d ${MAGENTO_ROOT} -s /bin/bash www
 
-COPY docker-entrypoint.sh /docker-entrypoint.sh
+COPY .docker/php/docker-entrypoint.sh /docker-entrypoint.sh
 RUN ["chmod", "+x", "/docker-entrypoint.sh"]
 
 RUN mkdir -p ${MAGENTO_ROOT}
@@ -161,6 +159,8 @@ VOLUME ${MAGENTO_ROOT}
 RUN chown -R www:www /usr/local /var/www /var/log /usr/local/etc/php/conf.d ${MAGENTO_ROOT}
 
 ENTRYPOINT ["/docker-entrypoint.sh"]
+
+COPY /app /app
 
 WORKDIR ${MAGENTO_ROOT}
 
