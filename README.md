@@ -1,1 +1,1 @@
-magento
+magento.
