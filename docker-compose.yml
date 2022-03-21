@@ -71,14 +71,6 @@ services:
       - BASE_URL=${BASE_URL}
       - BASE_URL_SECURE=${BASE_URL_SECURE}
       - TWO_FACTOR_AUTH=${TWO_FACTOR_AUTH}
-    volumes:
-      - './app:/app:ro,delegated'
-      - './app/vendor:/app/vendor:rw,delegated'
-      - './app/generated:/app/generated:rw,delegated'
-      - './app/var:/app/var:rw,delegated'
-      - './app/app/etc:/app/app/etc:rw,delegated'
-      - './app/pub/media:/app/pub/media:rw,delegated'
-      - './app/pub/static:/app/pub/static:rw,delegated'
     networks:
       magento:
         aliases:

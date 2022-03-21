@@ -21,12 +21,7 @@ if [[ "$HOST_IP" == "$HOST_NAME" ]]; then
   printf "\n%s %s\n" "$HOST_IP" "$HOST_NAME" >> /etc/hosts
 fi
 
-# Handle composer credentials && run composer install
-composer config --global http-basic.repo.magento.com $PUBLIC_KEY $PRIVATE_KEY
-
-mkdir /app/vendor
-
-composer install --no-progress --no-interaction --no-autoloader
+composer install --prefer-dist --no-progress --no-suggest --no-interaction
 
 INSTALL=$(bin/magento config:show 2>&1 >/dev/null | grep "There are no commands defined")
 

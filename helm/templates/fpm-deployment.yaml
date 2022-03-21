@@ -78,7 +78,7 @@ spec:
               valueFrom:
                 configMapKeyRef:
                   name: {{ .Chart.Name }}
-                  key: admin-user
+                  key: admin-username
             - name: ADMIN_PASSWORD
               valueFrom:
                 configMapKeyRef:
