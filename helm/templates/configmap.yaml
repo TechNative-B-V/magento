@@ -24,3 +24,5 @@ data:
   admin-password: {{ .Values.fpm.admin.password | quote }}
   elasticsearch-host: {{ .Values.fpm.elasticsearch.host | quote }}
   elasticsearch-port: {{ .Values.fpm.elasticsearch.port | quote }}
+  nginx-host: {{ .Values.nginx.host | quote }}
+  nginx-upstream: {{ .Values.nginx.upstream | quote }}

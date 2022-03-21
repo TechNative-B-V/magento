@@ -28,5 +28,16 @@ spec:
           imagePullPolicy: {{ .Values.nginx.pullPolicy }}
           ports:
             - containerPort: 80
+          env:
+            - name: FPM_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ .Chart.Name }}
+                  key: nginx-host
+            - name: UPSTREAM_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ .Chart.Name }}
+                  key: nginx-upstream
           resources:
 {{ toYaml .Values.resources | indent 12 }}
