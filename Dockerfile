@@ -172,7 +172,6 @@ COPY /app /app
 RUN composer config --global http-basic.repo.magento.com ce7e9740272307af36caad68f054f144 d4975ceefe2051768b2e01b9796f53a0
 RUN composer install --prefer-dist --no-dev --no-scripts --no-progress --no-suggest --ignore-platform-reqs
 RUN composer dump-autoload --classmap-authoritative --no-dev
-RUN composer run-script --no-dev post-install-cmd
 
 USER root
 
