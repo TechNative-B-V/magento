@@ -2,7 +2,7 @@
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
-php:
+fpm:
   image: ghcr.io/ginokok1996/tn-magento-fpm
   tag: latest
   replicaCount: 1
