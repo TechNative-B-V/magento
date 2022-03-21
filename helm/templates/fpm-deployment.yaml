@@ -32,107 +32,106 @@ spec:
             - name: PUBLIC_KEY
               valueFrom:
                 configMapKeyRef:
-                  name: {{ template "fullname" . }}
+                  name: {{ .Chart.Name }}
                   key: public-key
             - name: PRIVATE_KEY
               valueFrom:
                 configMapKeyRef:
-                  name: {{ template "fullname" . }}
+                  name: {{ .Chart.Name }}
                   key: private-key
             - name: DB_HOST
               valueFrom:
                 configMapKeyRef:
-                  name: {{ template "fullname" . }}
+                  name: {{ .Chart.Name }}
                   key: database-host
             - name: DB_NAME
               valueFrom:
                 configMapKeyRef:
-                  name: {{ template "fullname" . }}
+                  name: {{ .Chart.Name }}
                   key: database-name
             - name: DB_USER
               valueFrom:
                 configMapKeyRef:
-                  name: {{ template "fullname" . }}
+                  name: {{ .Chart.Name }}
                   key: database-user
             - name: DB_PASSWORD
               valueFrom:
                 configMapKeyRef:
-                  name: {{ template "fullname" . }}
+                  name: {{ .Chart.Name }}
                   key: database-password
             - name: ADMIN_FIRST_NAME
               valueFrom:
                 configMapKeyRef:
-                  name: {{ template "fullname" . }}
+                  name: {{ .Chart.Name }}
                   key: admin-firstname
             - name: ADMIN_LAST_NAME
               valueFrom:
                 configMapKeyRef:
-                  name: {{ template "fullname" . }}
+                  name: {{ .Chart.Name }}
                   key: admin-lastname
             - name: ADMIN_EMAIL
               valueFrom:
                 configMapKeyRef:
-                  name: {{ template "fullname" . }}
+                  name: {{ .Chart.Name }}
                   key: admin-email
             - name: ADMIN_USER
               valueFrom:
                 configMapKeyRef:
-                  name: {{ template "fullname" . }}
+                  name: {{ .Chart.Name }}
                   key: admin-user
             - name: ADMIN_PASSWORD
               valueFrom:
                 configMapKeyRef:
-                  name: {{ template "fullname" . }}
+                  name: {{ .Chart.Name }}
                   key: admin-password
             - name: USE_REWRITES
               valueFrom:
                 configMapKeyRef:
-                  name: {{ template "fullname" . }}
+                  name: {{ .Chart.Name }}
                   key: use-rewrites
             - name: ELASTIC_SEARCH_HOST
               valueFrom:
                 configMapKeyRef:
-                  name: {{ template "fullname" . }}
+                  name: {{ .Chart.Name }}
                   key: elasticsearch-host
             - name: ELASTIC_SEARCH_PORT
               valueFrom:
                 configMapKeyRef:
-                  name: {{ template "fullname" . }}
+                  name: {{ .Chart.Name }}
                   key: elasticsearch-port
             - name: SESSION_SAVE
               valueFrom:
                 configMapKeyRef:
-                  name: {{ template "fullname" . }}
+                  name: {{ .Chart.Name }}
                   key: session-save
             - name: USE_SECURE
               valueFrom:
                 configMapKeyRef:
-                  name: {{ template "fullname" . }}
+                  name: {{ .Chart.Name }}
                   key: use-secure
             - name: USE_SECURE_ADMIN
               valueFrom:
                 configMapKeyRef:
-                  name: {{ template "fullname" . }}
+                  name: {{ .Chart.Name }}
                   key: use-secure-admin
             - name: BACKEND_FRONTNAME
               valueFrom:
                 configMapKeyRef:
-                  name: {{ template "fullname" . }}
+                  name: {{ .Chart.Name }}
                   key: backend-frontname
             - name: BASE_URL
               valueFrom:
                 configMapKeyRef:
-                  name: {{ template "fullname" . }}
+                  name: {{ .Chart.Name }}
                   key: base-url
             - name: BASE_URL_SECURE
               valueFrom:
                 configMapKeyRef:
-                  name: {{ template "fullname" . }}
+                  name: {{ .Chart.Name }}
                   key: base-url-secure
             - name: TWO_FACTOR_AUTH
               valueFrom:
                 configMapKeyRef:
-                  name: {{ template "fullname" . }}
+                  name: {{ .Chart.Name }}
                   key: two-factor-auth
           resources:
-{{ toYaml .Values.resources | indent 12 }}

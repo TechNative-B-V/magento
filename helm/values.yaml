@@ -3,9 +3,9 @@
 # Declare variables to be passed into your templates.
 
 php:
-  image: ghcr.io/ginokok1996/tn-magento-php
+  image: ghcr.io/ginokok1996/tn-magento-fpm
   tag: latest
-  replicaCount: 2
+  replicaCount: 1
   pullPolicy: always
   publicKey: ce7e9740272307af36caad68f054f144
   privateKey: d4975ceefe2051768b2e01b9796f53a0
@@ -35,7 +35,7 @@ php:
 nginx:
   image: ghcr.io/ginokok1996/tn-magento-nginx
   tag: latest
-  replicaCount: 2
+  replicaCount: 1
   pullPolicy: always
 
 elasticsearch:
@@ -44,7 +44,7 @@ elasticsearch:
     pullPolicy: IfNotPresent
 
 mariadb:
-  enabled: false
+  enabled: true
   image:
     pullPolicy: IfNotPresent
   auth:

@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: {{ .Release.Name }}-configmap
+  name: {{ .Chart.Name }}
 data:
   public-key: {{ .Values.php.publicKey | quote }}
   private-key: {{ .Values.php.privateKey | quote }}

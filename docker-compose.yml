@@ -47,7 +47,7 @@ services:
           - phpmyadmin.magento2.docker   
   fpm:
     hostname: fpm.magento2.docker
-    image: ${CONTAINER_REGISTRY_BASE}/tn-magento-php:latest
+    image: ${CONTAINER_REGISTRY_BASE}/tn-magento-fpm:latest
     build: .
     environment:
       - PUBLIC_KEY=${PUBLIC_KEY}
@@ -88,7 +88,9 @@ services:
         condition: service_healthy
   web:
     image: ${CONTAINER_REGISTRY_BASE}/tn-magento-nginx:latest
-    build: ./.docker/nginx
+    build:
+      context: .
+      dockerfile: Dockerfile-nginx
     ports:
       - 80:80
       - 443:443
@@ -96,14 +98,6 @@ services:
     restart: 'always'
     depends_on:
       - fpm
-    volumes:
-      - './app:/app:ro,delegated'
-      - './app/generated:/app/generated:rw,delegated'
-      - './app/var:/app/var:rw,delegated'
-      - './app/app/etc:/app/app/etc:rw,delegated'
-      - './app/pub/media:/app/pub/media:rw,delegated'
-      - './app/pub/static:/app/pub/static:rw,delegated'
-      - './app/vendor:/app/vendor:rw,delegated'
     networks:
       magento:
         aliases:
