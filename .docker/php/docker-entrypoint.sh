@@ -45,8 +45,6 @@ if [ ! -z "$INSTALL" ]; then
   --backend-frontname=$BACKEND_FRONTNAME \
   --base-url=$BASE_URL \
   --base-url-secure=$BASE_URL_SECURE
-
-  bin/magento setup:static-content:deploy -f
 fi
 
 #check if 2fa needs to be enabled or disabled
