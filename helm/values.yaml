@@ -14,11 +14,11 @@ fpm:
   useSecure: 0
   useSecureAdmin: 0
   backendFrontName: xpanel
-  baseUrl: http://parts-technative.nl/
-  baseUrlSecure: https://parts-technative.nl/
+  baseUrl: http://test.parts-technative.nl/
+  baseUrlSecure: https://test.parts-technative.nl/
   twoFactorAuth: 0
   database:
-    host: magento2-database.cz4nevwmfgni.eu-central-1.rds.amazonaws.com
+    host: new-magento-test.cz4nevwmfgni.eu-central-1.rds.amazonaws.com
     name: magento2
     user: magento2
     password: magento2
@@ -37,8 +37,8 @@ nginx:
   tag: latest
   replicaCount: 1
   pullPolicy: Always
-  host: magento-fpm.default.svc.cluster.local
-  upstream: 127.0.0.1
+  host: localhost
+  upstream: localhost
 
 elasticsearch:
   enabled: true
@@ -85,7 +85,7 @@ redis:
 
 ingress:
   enabled: true
-  hostname: parts-technative.nl
+  hostname: test.parts-technative.nl
   path: /
   annotations:
       # kubernetes.io/ingress.global-static-ip-name: chart-ip

@@ -12,13 +12,10 @@ spec:
   type: NodePort
   ports:
     - port: 80
-      targetPort: 80
+      targetPort: http
       protocol: TCP
       name: http
-    - port: 443
-      targetPort: 80
-      protocol: TCP
-      name: https
+
   selector:
-    app.kubernetes.io/name: {{ .Release.Name }}-nginx
+    app.kubernetes.io/name: {{ .Release.Name }}
     app.kubernetes.io/instance: {{ .Release.Name }}
