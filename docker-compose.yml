@@ -71,7 +71,8 @@ services:
       - BASE_URL=${BASE_URL}
       - BASE_URL_SECURE=${BASE_URL_SECURE}
       - TWO_FACTOR_AUTH=${TWO_FACTOR_AUTH}
-      - MAGENTO_RUN_MODE=developer
+    volumes: 
+      - './app/pub:/app/pub:rw,delegated' 
     networks:
       magento:
         aliases:
@@ -84,13 +85,13 @@ services:
     build:
       context: .
       dockerfile: Dockerfile-nginx
-    environment:
-      - MAGENTO_RUN_MODE=developer
     ports:
       - 80:80
       - 443:443
     hostname: web.magento2.docker
     restart: 'always'
+    volumes: 
+      - './app/pub:/app/pub:rw,delegated' 
     depends_on:
       - fpm
     networks:

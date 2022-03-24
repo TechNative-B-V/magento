@@ -47,16 +47,13 @@ if [ ! -z "$INSTALL" ]; then
   --base-url-secure=$BASE_URL_SECURE
 fi
 
+bin/magento deploy:mode:set production
+
 #check if 2fa needs to be enabled or disabled
 if [ $TWO_FACTOR_AUTH -eq 1 ]; then
   bin/magento module:enable "Magento_TwoFactorAuth"
 else
   bin/magento module:disable "Magento_TwoFactorAuth"
 fi
-
-#flush magento cache
-bin/magento cache:flush
-
-bin/magento config:show
 
 exec "$@"
