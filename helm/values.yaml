@@ -3,7 +3,7 @@
 # Declare variables to be passed into your templates.
 
 fpm:
-  image: ghcr.io/ginokok1996/tn-magento-fpm
+  image: ghcr.io/TechNative-B-V/tn-magento-fpm
   tag: latest
   replicaCount: 1
   pullPolicy: Always
@@ -14,8 +14,8 @@ fpm:
   useSecure: 0
   useSecureAdmin: 0
   backendFrontName: xpanel
-  baseUrl: http://test.parts-technative.nl/
-  baseUrlSecure: https://test.parts-technative.nl/
+  baseUrl: http://parts-technative.nl/
+  baseUrlSecure: https://parts-technative.nl/
   twoFactorAuth: 0
   database:
     host: new-magento-test.cz4nevwmfgni.eu-central-1.rds.amazonaws.com
@@ -33,7 +33,7 @@ fpm:
     port: 9200
   
 nginx:
-  image: ghcr.io/ginokok1996/tn-magento-nginx
+  image: ghcr.io/TechNative-B-V/tn-magento-nginx
   tag: latest
   replicaCount: 1
   pullPolicy: Always
@@ -85,7 +85,7 @@ redis:
 
 ingress:
   enabled: true
-  hostname: test.parts-technative.nl
+  hostname: parts-technative.nl
   path: /
   annotations:
       # kubernetes.io/ingress.global-static-ip-name: chart-ip
