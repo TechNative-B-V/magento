@@ -81,7 +81,7 @@ services:
       db:
         condition: service_healthy
   web:
-    image: ${CONTAINER_REGISTRY_BASE}/tn-magento-nginx${APP_BUILD}
+    image: ${CONTAINER_REGISTRY_BASE}/tn-magento-nginx:${APP_BUILD}
     build:
       context: .
       dockerfile: Dockerfile-nginx
