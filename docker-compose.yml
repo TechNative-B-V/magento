@@ -47,7 +47,7 @@ services:
           - phpmyadmin.magento2.docker   
   fpm:
     hostname: fpm.magento2.docker
-    image: ${CONTAINER_REGISTRY_BASE}/tn-magento-fpm:latest
+    image: ${CONTAINER_REGISTRY_BASE}/tn-magento-fpm:${APP_BUILD}
     build: .
     environment:
       - PUBLIC_KEY=${PUBLIC_KEY}
@@ -81,7 +81,7 @@ services:
       db:
         condition: service_healthy
   web:
-    image: ${CONTAINER_REGISTRY_BASE}/tn-magento-nginx:latest
+    image: ${CONTAINER_REGISTRY_BASE}/tn-magento-nginx:${APP_BUILD}
     build:
       context: .
       dockerfile: Dockerfile-nginx
