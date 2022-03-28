@@ -5,7 +5,7 @@ entries:
       category: Analytics
     apiVersion: v2
     appVersion: 7.17.1
-    created: "2022-03-28T07:41:27.7611931+02:00"
+    created: "2022-03-28T07:46:59.0145987+02:00"
     dependencies:
     - condition: global.kibanaEnabled
       name: kibana
@@ -39,7 +39,7 @@ entries:
       category: Database
     apiVersion: v2
     appVersion: 10.5.15
-    created: "2022-03-28T07:41:27.7635661+02:00"
+    created: "2022-03-28T07:46:59.0172952+02:00"
     dependencies:
     - name: common
       repository: https://charts.bitnami.com/bitnami
@@ -74,7 +74,7 @@ entries:
       category: Database
     apiVersion: v2
     appVersion: 6.2.6
-    created: "2022-03-28T07:41:27.7676974+02:00"
+    created: "2022-03-28T07:46:59.022302+02:00"
     dependencies:
     - name: common
       repository: https://charts.bitnami.com/bitnami
@@ -105,7 +105,7 @@ entries:
   technative-magento:
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2022-03-28T07:41:27.7541389+02:00"
+    created: "2022-03-28T07:46:59.0083777+02:00"
     dependencies:
     - condition: mariadb.enabled
       name: mariadb
@@ -120,10 +120,10 @@ entries:
       repository: https://charts.bitnami.com/bitnami
       version: 17.9.11
     description: A Helm chart for Kubernetes
-    digest: 6b4f11058c5b02ec01619349390f8ad7cbb272582a936ebef8dd4ee9c77e55a9
+    digest: 8852534a75c7a2c7b659ba098de3732efc78a214098f0c0256c19613cf1880a9
     name: technative-magento
     type: application
     urls:
     - technative-magento-0.1.0.tgz
     version: 0.1.0
-generated: "2022-03-28T07:41:27.7392772+02:00"
+generated: "2022-03-28T07:46:58.9927775+02:00"

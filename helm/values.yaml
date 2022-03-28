@@ -3,7 +3,7 @@
 # Declare variables to be passed into your templates.
 
 fpm:
-  image: ghcr.io/TechNative-B-V/tn-magento-fpm
+  image: ghcr.io/technative-b-v/tn-magento-fpm
   tag: latest
   replicaCount: 1
   pullPolicy: Always
@@ -33,7 +33,7 @@ fpm:
     port: 9200
   
 nginx:
-  image: ghcr.io/TechNative-B-V/tn-magento-nginx
+  image: ghcr.io/technative-b-v/tn-magento-nginx
   tag: latest
   replicaCount: 1
   pullPolicy: Always
