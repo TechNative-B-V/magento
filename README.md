@@ -65,6 +65,12 @@ To install the stack on the default namespace we run the following command:
 
 ## upgrading the kubernetes deployment
 
+For upgrading the stack on a kubernetes cluster we require a few things:
+
+* kubectl cli
+* helm cli
+* kubeconfig of the kubernetes cluster
+
 If you want to apply changes made to the helm templates or change some helm values we can update an existing deployment with the ``` helm upgrade ``` command, more info abou this command can be found [here](https://helm.sh/docs/helm/helm_upgrade/).
 
 If changes are made in the helm templates make sure you create a new package (.tgz file) for information on how to do this check the **Updating the helm files** section of this file.
