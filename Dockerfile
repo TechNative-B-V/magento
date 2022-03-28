@@ -99,29 +99,6 @@ RUN pecl install -o -f \
     redis \
     yaml
 
-RUN curl -A "Docker" -o /tmp/blackfire-probe.tar.gz -D - -L -s https://blackfire.io/api/v1/releases/probe/php/linux/amd64/$(php -r "echo PHP_MAJOR_VERSION.PHP_MINOR_VERSION;") \
-    && mkdir -p /tmp/blackfire \
-    && tar zxpf /tmp/blackfire-probe.tar.gz -C /tmp/blackfire \
-    && mv /tmp/blackfire/blackfire-*.so $(php -r "echo ini_get ('extension_dir');")/blackfire.so \
-    && echo blackfire.agent_socket=tcp://blackfire:8707 > $(php -i | grep "additional .ini" | awk '{print $9}')/blackfire.ini \
-    && rm -rf /tmp/blackfire /tmp/blackfire-probe.tar.gz
-RUN mkdir -p /tmp/zoo \
-    && cd /tmp/zoo \
-    && git clone https://github.com/php-zookeeper/php-zookeeper.git \
-    && curl -LO https://archive.apache.org/dist/zookeeper/zookeeper-3.4.14/zookeeper-3.4.14.tar.gz \
-    && tar -xf zookeeper-3.4.14.tar.gz \
-    && cp zookeeper-3.4.14/zookeeper-client/zookeeper-client-c/generated/zookeeper.jute.h zookeeper-3.4.14/zookeeper-client/zookeeper-client-c/include \
-    && cd zookeeper-3.4.14/zookeeper-client/zookeeper-client-c \
-    && ./configure \
-    && sed -i 's/CFLAGS = -g -O2 -D_GNU_SOURCE/CFLAGS = -g -O2 -D_GNU_SOURCE -Wno-error=format-overflow -Wno-error=stringop-truncation/g' Makefile \
-    && make \
-    && make install \
-    && ldconfig \
-    && cd /tmp/zoo/php-zookeeper \
-    && phpize \
-    && ./configure --with-libzookeeper-dir=../zookeeper-3.4.14/zookeeper-client/zookeeper-client-c \
-    && make \
-    && make install
 RUN rm -f /usr/local/etc/php/conf.d/*sodium.ini \
     && rm -f /usr/local/lib/php/extensions/*/*sodium.so \
     && apt-get remove libsodium* -y \
@@ -134,14 +111,6 @@ RUN rm -f /usr/local/etc/php/conf.d/*sodium.ini \
     && cd / \
     && rm -rf /tmp/libsodium \
     && pecl install -o -f libsodium
-RUN cd /tmp \
-    && curl -O https://downloads.ioncube.com/loader_downloads/ioncube_loaders_lin_x86-64.tar.gz \
-    && tar zxvf ioncube_loaders_lin_x86-64.tar.gz \
-    && export PHP_VERSION=$(php -r "echo PHP_MAJOR_VERSION.'.'.PHP_MINOR_VERSION;") \
-    && export PHP_EXT_DIR=$(php-config --extension-dir) \
-    && cp "./ioncube/ioncube_loader_lin_${PHP_VERSION}.so" "${PHP_EXT_DIR}/ioncube.so" \
-    && rm -rf ./ioncube \
-    && rm ioncube_loaders_lin_x86-64.tar.gz
 
 COPY .docker/php/conf/php-fpm.ini /usr/local/etc/php/conf.d/zz-magento.ini
 COPY .docker/php/conf/php-pcov.ini /usr/local/etc/php/conf.d/zz-pcov-settings.ini
